@@ -6,6 +6,9 @@ import Cars from "./Cars/Cars";
 import CarDetail from "./CarDetail/CarDetail";
 
 class App extends Component {
+  state = {
+    isLohinIn: false,
+  };
   render() {
     return (
       <div>
@@ -35,10 +38,17 @@ class App extends Component {
           </ul>
         </nav>
 
+        <h3>Is Logged in: {this.state.isLohinIn ? "True" : "False"}</h3>
+        <button onClick={() => this.setState({ isLohinIn: true })}>
+          Login
+        </button>
         <hr />
         <Switch>
           <Route path="/" exact render={() => <h1>Home Page</h1>} />
-          <Route path="/about" component={About} />
+          {this.state.isLohinIn ? (
+            <Route path="/about" component={About} />
+          ) : null}
+
           <Route path="/cars/:name" component={CarDetail} />
           <Route path="/cars" component={Cars} />
           <Redirect to="/" />
