@@ -1,36 +1,47 @@
-import React, {Component} from 'react'
-import './App.scss'
-import {Route} from 'react-router-dom'
-import About from './About/About'
-import Cars from './Cars/Cars'
+import React, { Component } from "react";
+import "./App.scss";
+import { Route, NavLink } from "react-router-dom";
+import About from "./About/About";
+import Cars from "./Cars/Cars";
 
 class App extends Component {
   render() {
-
     return (
       <div>
         <nav className="nav">
           <ul>
             <li>
-              <a href="/">Home</a>
+              <NavLink to="/" exact activeClassName={"wfm-active"}>
+                Home
+              </NavLink>
             </li>
             <li>
-              <a href="/about">About</a>
+              <NavLink to="/about" activeStyle={{ color: "blue" }}>
+                About
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={{
+                  pathname: "/cars",
+                  search: "?a=12&b=777",
+                  hash: "wfm-hash",
+                }}
+              >
+                Cars
+              </NavLink>
             </li>
           </ul>
         </nav>
 
-        <hr/>
+        <hr />
 
-        {/*localhost:3000*/}
         <Route path="/" exact render={() => <h1>Home Page</h1>} />
-
-        <About />
-
-        <Cars />
+        <Route path="/about" component={About} />
+        <Route path="/cars" component={Cars} />
       </div>
     );
   }
 }
 
-export default App
+export default App;
